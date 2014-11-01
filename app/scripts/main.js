@@ -15,4 +15,13 @@ window.FdbsQuiz = {
 $(document).ready(function () {
     'use strict';
     FdbsQuiz.init();
+
+    _.templateSettings.variable = "ic";
+
+    var item_template = _.template(
+        $( "script.item-template" ).html()
+    );
+
+
+
 });
