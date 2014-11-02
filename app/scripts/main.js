@@ -7,21 +7,14 @@ window.FdbsQuiz = {
     Views: {},
     Routers: {},
     init: function () {
-        'use strict';
         console.log('Hello from Backbone!');
+
+        var App = new AppView;
     }
 };
 
 $(document).ready(function () {
     'use strict';
     FdbsQuiz.init();
-
-    _.templateSettings.variable = "ic";
-
-    var item_template = _.template(
-        $( "script.item-template" ).html()
-    );
-
-
-
+   
 });
