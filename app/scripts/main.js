@@ -15,6 +15,7 @@ window.FdbsQuiz = {
 
 $(document).ready(function () {
     'use strict';
+
     FdbsQuiz.init();
    
 });

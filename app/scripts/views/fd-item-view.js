@@ -4,28 +4,29 @@ var View = Backbone.View.extend({
 
     tagName: 'div',
 
-    el: '#fdbs-app',
+    el: '#fdbs-app-forms',
 
     id: '',
 
     className: '',
 
-    events: {},
-
-    initialize: function () {
-        // this.listenTo(this.model, 'change', this.render);
-        // this.collection.fetch({reset: true});
-        // this.collection.bind('reset', function(data) {console.log(data)});
-        // console.log(returnData);
-        // this.render();
-        console.log('view loaded');
+    events: {
+        'click .save-btn': 'save'
     },
 
-    render: function (eventName) {
-        console.log('view rendered');
-        // var compiled = this.template(this.data);
-        // console.log(eventName);
-        this.$el.html(this.template(eventName));
+    save: function() {
+
+    },
+
+    initialize: function () {
+        this.collection = new Collection();
+        this.collection.on('add',this.render,this);
+        console.log('item view loaded');
+    },
+
+    render: function () {
+        console.log('item view rendered',this.collection.toJSON()[0]);
+        this.$el.html(this.template(this.collection.toJSON()[0])); /*TODO: Investigate why the obj is nested*/
     }
 
 });

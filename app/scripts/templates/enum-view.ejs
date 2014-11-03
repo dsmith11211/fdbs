@@ -1,0 +1,25 @@
+<div class="dropdown">
+	<label for="dropdown-materials">Materials</label>
+	<div class="dropdown-wrap form-group">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdown-materials" data-toggle="dropdown">
+	    <span data-bind="label">Select...</span>
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-wrap">
+	  	<% for( var mat in material ) { %>
+			<li role="presentation"><a role="menuitem" tabindex="-1" href="#"> <%= material[mat] %> </a></li>
+	  	<% } %>
+	  </ul>
+		<label class="checkbox-inline checkbox-mats">
+			<input id="hazard-check" type="checkbox" name="keywords" value="__option__">
+			<span class="bold-label">Check this box</span>
+			<span>if the listing contains or may contain restricted materials</span>
+		</label>
+	</div>
+</div>
+<div class="form-group">
+	<label for="radio-rapper">Measurements</label>
+	<div class="radio-wrapper">
+		
+	</div>
+</div>

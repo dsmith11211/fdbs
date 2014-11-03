@@ -2,13 +2,15 @@ var Collection = Backbone.Collection.extend({
 
 	model: Model,
 
+	url: '../../data/item.json',
+
     parse: function(response) {
-    	console.log(response);
     	return response;
     },
 
     initialize: function() {
     	console.log('collection init');
+    	this.fetch();
     }
 
 });
