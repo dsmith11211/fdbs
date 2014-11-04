@@ -10,7 +10,29 @@ var EnumView = Backbone.View.extend({
 
     events: {
         'click .dropdown-menu li': "materialSelected",
-        'click #hazard-check' : "hazardSelected"
+        'click #hazard-check' : "hazardSelected",
+        'click #shape-radio-btn' : "shapeSelected",
+        'click #unit-radio-btn' : "unitSelected"
+    },
+
+    unitSelected: function(unit) {
+        var $target = $(unit.currentTarget);
+        var unit = $target.val();
+        this.toggleUnit(unit);
+        // console.log(this.model.toJSON());
+    },
+
+    toggleUnit: function(unit) {
+        this.model.set({
+            unitInches: unit
+        })
+        // console.log(this.model.get('unitInches'));
+    },
+
+    shapeSelected: function(shape) {
+        var $target = $(shape.currentTarget);
+        console.log($target.val());
+
     },
 
     hazardSelected: function(bool) {
@@ -29,9 +51,19 @@ var EnumView = Backbone.View.extend({
         return false;
     },
 
+    unitChange: function(model, val, options) {
+        console.log(model.get("unitInches"))
+    },
+
     initialize: function() {
+        // this.model = new EnumItemModel();
         this.collection = new EnumItemCollection();
         this.collection.on('add', this.render, this);
+        // this.model.on('change:unitInches', this.unitChange, this);
+        // this.model.on('change', this.render, this);
+        // if(this.model) {
+        //     this.model.on('change',this.render,this);
+        // }
     },
 
     render: function() {

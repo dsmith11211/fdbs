@@ -3,11 +3,41 @@ var EnumItemModel = Backbone.Model.extend({
     initialize: function() {
     },
 
+    defaults: {
+    	unitInches : 'in',
+    	disabled : true //Measurement Controls
+    },
+
+    Enum: function (data) {
+    	var self = this;
+
+    	self.condition = {
+    		description: data.condition.description
+    	};
+    	self.material = data.material;
+    	self.measurement = {
+    		shape: data.measurement.shape,
+    		unit: {
+    			cm: data.measurement.unit.cm,
+    			in: data.measurement.unit.in
+    		}
+    	}
+
+    	return self;
+    },
+
     validate: function(attrs, options) {
     },
 
     parse: function(response, options)  {
-        return response.itemEnums;
+    	var self = this,
+    		enumModel = {};
+
+    	_.each(response, function(item){
+    	    enumModel = new self.Enum(item);
+    	})
+
+    	self.set(enumModel);
     }
 });
 
