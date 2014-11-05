@@ -23,7 +23,7 @@
 		<span class="radio-inline">Measurements are in:</span>
 			<% for( var unit in measurement.unit ) { %>
 				<label class="radio-inline">
-				    <input type="radio" name="inlineRadioOptions" id="unit-radio-btn" value="<%= unit %>">
+				    <input type="radio" name="inlineRadioOptions" id="unit-radio-btn" checked= "<%= unit.checked %>" value="<%= unit %>">
 				    <%= unit %>
 				    </input>
 				</label>	
@@ -46,18 +46,14 @@
 			<label for="length-input">Length:</label>
 			<div class="input-group length-input">
 			  <input type="text" class="form-control">
-			  <% if (unitInches == 'in') { %>
-			  	<span class="input-group-addon">.in</span>
-			  <% } else { %>
-			  	<span class="input-group-addon">.cm</span>
-			  <% } %>
+			  	<span class="input-group-addon"><%= unitType %></span>
 			</div>
 		</div>
 		<div class="col-md-6">
 			<label for="depth-input">Depth:</label>
 			<div class="input-group depth-input">
 			  <input type="text" class="form-control">
-			  <span class="input-group-addon">.in</span>
+			  <span class="input-group-addon"><%= unitType %></span>
 			</div>
 		</div>
 	</div>
@@ -66,14 +62,14 @@
 			<label for="height-input">Height:</label>
 			<div class="input-group height-input">
 			  <input type="text" class="form-control">
-			  <span class="input-group-addon">.in</span>
+			  <span class="input-group-addon"><%= unitType %></span>
 			</div>
 		</div>
 		<div class="col-md-6">
 			<label for="diameter-input">Diameter:</label>
 			<div class="input-group diameter-input">
 			  <input type="text" class="form-control">
-			  <span class="input-group-addon">.in</span>
+			  <span class="input-group-addon"><%= unitType %></span>
 			</div>
 		</div>
 	</div>
