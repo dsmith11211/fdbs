@@ -5,7 +5,8 @@ var AppView = Backbone.View.extend({
         
         function loadView() {
         	var enumsModel = new EnumItemModel();
-            var enumView = new EnumView({model:enumsModel}); //"Bootstrap" of enums JSON
+        	var enumsCollection = new EnumItemCollection({model:enumsModel});
+            var enumView = new EnumView({collection:enumsCollection}); //"Bootstrap" of enums JSON
             var itemsView = new View();
         }
 

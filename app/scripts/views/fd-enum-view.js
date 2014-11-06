@@ -8,6 +8,8 @@ var EnumView = Backbone.View.extend({
 
     className: '',
 
+    model: EnumItemModel,
+
     events: {
         'click .dropdown-menu li': "materialSelected",
         'click #hazard-check' : "hazardSelected",
@@ -23,10 +25,11 @@ var EnumView = Backbone.View.extend({
     },
 
     toggleUnit: function(unit) {
+        // this.model = this.collection.models[0];
         this.model.set({
             unitInches: unit
-        })
-        // console.log(this.model.get('unitInches'));
+        });
+        // console.log(this.model);
     },
 
     shapeSelected: function(shape) {
@@ -52,14 +55,15 @@ var EnumView = Backbone.View.extend({
     },
 
     unitChange: function(model, val, options) {
-        console.log(model.get("unitInches"))
+        console.log(model.get("unitInches"));
+        this.model.save();
+        this.render();
     },
 
     initialize: function() {
-        // this.model = new EnumItemModel();
-        this.collection = new EnumItemCollection();
+        this.model = this.collection.models[0];
         this.collection.on('add', this.render, this);
-        // this.model.on('change:unitInches', this.unitChange, this);
+        this.model.on('change:unitInches', this.unitChange, this);
         // this.model.on('change', this.render, this);
         // if(this.model) {
         //     this.model.on('change',this.render,this);

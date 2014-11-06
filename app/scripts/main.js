@@ -9,7 +9,7 @@ window.FdbsQuiz = {
     init: function () {
         console.log('Hello from Backbone!');
 
-        var App = new AppView;
+        var App = new AppView();
     }
 };
 
