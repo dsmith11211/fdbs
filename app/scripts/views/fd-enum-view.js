@@ -8,8 +8,6 @@ var EnumView = Backbone.View.extend({
 
     className: '',
 
-    model: EnumItemModel,
-
     events: {
         'click .dropdown-menu li': "materialSelected",
         'click #hazard-check' : "hazardSelected",
@@ -25,17 +23,25 @@ var EnumView = Backbone.View.extend({
     },
 
     toggleUnit: function(unit) {
-        // this.model = this.collection.models[0];
+        this.model = this.collection.models[0];
         this.model.set({
-            unitInches: unit
+            unitType: unit
         });
         // console.log(this.model);
+        this.changeRender(this.model);
     },
 
     shapeSelected: function(shape) {
-        var $target = $(shape.currentTarget);
-        console.log($target.val());
+        this.model = this.collection.models[0];
+        var $target = $(shape.currentTarget),
+            type = $target.val();
 
+        this.model.set({
+            disabled : false,
+            shapeType : type
+        });
+
+        this.changeRender(this.model);
     },
 
     hazardSelected: function(bool) {
@@ -54,16 +60,27 @@ var EnumView = Backbone.View.extend({
         return false;
     },
 
-    unitChange: function(model, val, options) {
-        console.log(model.get("unitInches"));
-        this.model.save();
-        this.render();
-    },
+    changeRender : function(model) {
+
+        this.collection.remove(this.collection.at(0));
+        this.collection.add(model,{at:0});
+    },  
+
+    // unitChange: function(model, val, options) {
+    //     console.log(this.model.get("unitInches"));
+    //     // console.log(model,val,options);
+    //     var newModel = this.model.clone();
+
+
+    //     // this.collection.refresh(this.collection.models);
+    //     // model.save();
+    //     this.render();
+    // },
 
     initialize: function() {
         this.model = this.collection.models[0];
         this.collection.on('add', this.render, this);
-        this.model.on('change:unitInches', this.unitChange, this);
+        // this.model.on('change:unitInches', this.unitChange, this);
         // this.model.on('change', this.render, this);
         // if(this.model) {
         //     this.model.on('change',this.render,this);

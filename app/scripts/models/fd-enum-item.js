@@ -4,8 +4,9 @@ var EnumItemModel = Backbone.Model.extend({
     },
 
     defaults: {
-    	unitInches : 'in',
-    	disabled : true //Measurement Controls
+    	unitType : 'in', //default selected val
+    	disabled : true,
+        shapeType : '' 
     },
 
     Enum: function (data) {

@@ -7,8 +7,6 @@ window.FdbsQuiz = {
     Views: {},
     Routers: {},
     init: function () {
-        console.log('Hello from Backbone!');
-
         var App = new AppView();
     }
 };

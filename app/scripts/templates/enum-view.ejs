@@ -23,54 +23,75 @@
 		<span class="radio-inline">Measurements are in:</span>
 			<% var unitType = unitType %> <!-- Any way to reference parent scope here other than this? -->
 			<% for( var unit in measurement.unit ) { %>
-				<label class="radio-inline">
-				    <input type="radio" checked="<% (unitType == unit) %>" name="inlineRadioOptions" id="unit-radio-btn" value="<%= unit %>">
-				    <%= unit %>
-				    </input>
-				</label>	
-			<% } %>
-	</div>
-	<div class="radio-wrapper">
-		<span class="radio-inline">Measured item is:</span>
-			<% for( var type in measurement.shape ) { %>
-				<label class="radio-inline">
-				    <input type="radio" name="inlineRadioOptions" id="shape-radio-btn" value="<%= measurement.shape[type] %>">
-				    <%= measurement.shape[type] %>
-				    </input>
-				</label>	
+				<% if(unit == unitType) { %>
+					<label class="radio-inline">
+					    <input type="radio" checked="checked" name="unitRadioButton" id="unit-radio-btn" value="<%= unit %>">
+					    	<%= unit %>
+					    </input>
+					</label>
+				<% } else { %>	
+					<label class="radio-inline">
+					    <input type="radio" name="unitRadioButton" id="unit-radio-btn" value="<%= unit %>">
+					    	<%= unit %>
+					    </input>
+					</label>
+				<% } %>
 			<% } %>
 	</div>
 </div>
+<div class="form-group">
+	<div class="radio-wrapper">
+		<span class="radio-inline">Measured item is:</span>
+			<% var shapeType = shapeType %>
+			<% for( var type in measurement.shape ) { %>
+				<% if(measurement.shape[type] == shapeType) { %>
+					<label class="radio-inline">
+					    <input type="radio" checked="checked" name="shapeRadioButton" id="shape-radio-btn" value="<%= measurement.shape[type] %>">
+					    	<%= measurement.shape[type] %>
+					    </input>
+					</label>
+				<% } else { %>	
+					<label class="radio-inline">
+					    <input type="radio" name="shapeRadioButton" id="shape-radio-btn" value="<%= measurement.shape[type] %>">
+					    	<%= measurement.shape[type] %>
+					    </input>
+					</label>
+				<% } %>
+			<% } %>
+	</div>
+</div>
+
 <div class="measurement-controls">
+	<% var isDisabled = disabled ? 'disabled' : '' %>
 	<div class="form-group row">
 		<div class="col-md-6">
-			<label for="length-input">Length:</label>
+			<label for="length-input" class="<%= isDisabled %>">Length:</label>
 			<div class="input-group length-input">
-			  <input type="text" class="form-control">
-			  	<span class="input-group-addon"><%= unitInches %></span>
+			  <input type="text" class="form-control"<%= isDisabled %> >
+			  	<span class="input-group-addon"><%= unitType %></span>
 			</div>
 		</div>
 		<div class="col-md-6">
-			<label for="depth-input">Depth:</label>
+			<label for="depth-input" class="<%= isDisabled %>">Depth:</label>
 			<div class="input-group depth-input">
-			  <input type="text" class="form-control">
-			  <span class="input-group-addon"><%= unitInches %></span>
+			  <input type="text" class="form-control"<%= isDisabled %> >
+			  <span class="input-group-addon"><%= unitType %></span>
 			</div>
 		</div>
 	</div>
 	<div class="form-group row">
 		<div class="col-md-6">
-			<label for="height-input">Height:</label>
+			<label for="height-input" class="<%= isDisabled %>">Height:</label>
 			<div class="input-group height-input">
-			  <input type="text" class="form-control">
-			  <span class="input-group-addon"><%= unitInches %></span>
+			  <input type="text" class="form-control"<%= isDisabled %> >
+			  <span class="input-group-addon"><%= unitType %></span>
 			</div>
 		</div>
 		<div class="col-md-6">
-			<label for="diameter-input">Diameter:</label>
+			<label for="diameter-input" class="<%= isDisabled %>">Diameter:</label>
 			<div class="input-group diameter-input">
-			  <input type="text" class="form-control">
-			  <span class="input-group-addon"><%= unitInches %></span>
+			  <input type="text" class="form-control"<%= isDisabled %> >
+			  <span class="input-group-addon"><%= unitType %></span>
 			</div>
 		</div>
 	</div>
@@ -80,7 +101,7 @@
 	<div class="radio-wrapper">
 		<% for( var desc in condition.description ) { %>
 			<label class="radio-inline">
-			    <input type="radio" name="inlineRadioOptions" id="unit-radio-btn" value="<%= condition.description[desc] %>">
+			    <input type="radio" name="inlineRadioOptions" id="condition-radio-btn" value="<%= condition.description[desc] %>">
 			    <%= condition.description[desc] %>
 			    </input>
 			</label>	
