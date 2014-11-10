@@ -25,8 +25,10 @@ var View = Backbone.View.extend({
     },
 
     render: function () {
-        console.log('item view rendered',this.collection.toJSON()[0]);
-        this.$el.html(this.template(this.collection.toJSON()[0])); /*TODO: Investigate why the obj is nested*/
+        // console.log('item view rendered',this.collection.toJSON()[0]);
+        cachedItem = this.collection.toJSON()[0];
+        console.log(JSON.stringify(cachedItem));
+        this.$el.html(this.template(this.collection.toJSON()[0]));
     }
 
 });

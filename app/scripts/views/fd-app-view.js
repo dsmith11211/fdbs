@@ -6,18 +6,29 @@ var AppView = Backbone.View.extend({
     },
 
     loadView: function() {
-        var enumsModel = new EnumItemModel();
-        var enumsCollection = new EnumItemCollection({model:enumsModel});
-        var enumView = new EnumView({collection:enumsCollection}); //"Bootstrap" of enums JSON
         var itemsView = new View();
     },
 
     events: {
-        'click .load-btn': 'load'
+        'click #state-btn': 'cta'
     },
 
-    load: function() {
-        this.loadView(); //Entry point
+    cta: function() {
+        var $btn = $('#state-btn');
+        if($btn.hasClass('btn-load')) {
+            $btn.button('loading'); 
+            this.loadView(); //Entry point
+        } else if($btn.hasClass('btn-save')) {
+            this.save();
+        }
+    },
+
+    save: function() {
+        console.log('saved');
+        var outputDiv = $('.json-output');
+        outputDiv.html('<pre>' + JSON.stringify(cachedItem) + '</pre>');
+        $('.section-wrap').fadeOut('fast');
+        outputDiv.fadeIn('fast');
     }
 
 });

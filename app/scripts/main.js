@@ -1,5 +1,6 @@
 /*global FdbsQuiz, $*/
 
+var cachedItem = null;
 
 window.FdbsQuiz = {
     Models: {},
