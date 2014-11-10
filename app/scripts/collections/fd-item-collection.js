@@ -2,7 +2,7 @@ var Collection = Backbone.Collection.extend({
 
 	model: Model,
 
-	url: '../../data/item.json',
+	url: 'http://54.173.60.3:8888/result', //Hosted API
 
     parse: function(response) {
     	return response;
