@@ -2,7 +2,8 @@
 	<label for="dropdown-materials">Materials</label>
 	<div class="dropdown-wrap form-group">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdown-materials" data-toggle="dropdown">
-	    <span data-bind="label">Select...</span>
+	  	<% var selectedMat = selectedMat %>
+	    <span data-bind="label"><%= selectedMat %></span>
 	    <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-wrap">
@@ -99,12 +100,21 @@
 <div class="form-group">
 	<label for="radio-rapper">Condition ( Select one )</label>
 	<div class="radio-wrapper">
+		<% var selectedCondition = selectedCondition %>
 		<% for( var desc in condition.description ) { %>
-			<label class="radio-inline">
-			    <input type="radio" name="inlineRadioOptions" id="condition-radio-btn" value="<%= condition.description[desc] %>">
-			    <%= condition.description[desc] %>
-			    </input>
-			</label>	
+			<% if(condition.description[desc] == selectedCondition) { %>
+				<label class="radio-inline">
+				    <input type="radio" name="inlineRadioOptions" checked="checked" id="condition-radio-btn" value="<%= condition.description[desc] %>">
+				    <%= condition.description[desc] %>
+				    </input>
+				</label>
+			<% } else { %>
+				<label class="radio-inline">
+				    <input type="radio" name="inlineRadioOptions" id="condition-radio-btn" value="<%= condition.description[desc] %>">
+				    <%= condition.description[desc] %>
+				    </input>
+				</label>
+			<% } %>	
 		<% } %>
 	</div>
 </div>

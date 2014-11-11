@@ -50,13 +50,18 @@ var EnumView = Backbone.View.extend({
     },
 
     materialSelected: function(item) {
+        this.model = this.collection.models[0];
         var $target = $(item.currentTarget);
         $target.closest('.dropdown-wrap')
             .find('[data-bind="label"]').text($target.text())
             .end()
             .children('.dropdown-toggle').dropdown('toggle');
 
-        // console.log($target.text());
+            this.model.set({
+                selectedMat: $target.text(),
+            })
+
+        this.changeRender(this.model);
         return false;
     },
 
@@ -64,6 +69,7 @@ var EnumView = Backbone.View.extend({
 
         this.collection.remove(this.collection.at(0));
         this.collection.add(model,{at:0});
+        // this.render();
     },  
 
     // unitChange: function(model, val, options) {

@@ -15,22 +15,32 @@ var AppView = Backbone.View.extend({
 
     cta: function() {
         var $btn = $('#state-btn');
-        if($btn.hasClass('btn-load')) {
-            $btn.button('loading'); 
+        if ($btn.hasClass('btn-load')) {
+            $btn.button('loading');
             this.loadView(); //Entry point
-        } else if($btn.hasClass('btn-save')) {
+        } else if ($btn.hasClass('btn-save')) {
             this.save();
         }
     },
 
     save: function() {
-        console.log('saved');
+        this.saveForms();
+       
+    },
+
+    saveForms: function() {
+        itemModel.set({
+            title: $("#item-title").val().trim(),
+            description: $("#item-description").val().trim(),
+            internal_notes: $("#item-notes").val().trim(),
+
+        });
+
         var outputDiv = $('.json-output');
-        outputDiv.html('<pre>' + JSON.stringify(cachedItem) + '</pre>');
+        outputDiv.html('<pre>' + JSON.stringify(itemModel) + '</pre>');
         $('.section-wrap').fadeOut('fast');
         outputDiv.fadeIn('fast');
+        // console.log(itemModel);
     }
 
 });
-
-

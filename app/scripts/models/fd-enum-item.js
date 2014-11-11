@@ -1,12 +1,18 @@
 var EnumItemModel = Backbone.Model.extend({
 
     initialize: function() {
+        this.set({
+            selectedMat: cachedItem.material.description,
+            selectedCondition: cachedItem.condition.description
+        });
     },
 
     defaults: {
-    	unitType : 'in', //default selected val
-    	disabled : true,
-        shapeType : '' 
+        unitType : 'in', //default selected val
+        disabled : true,
+        shapeType : '' ,
+        selectedMat : '',
+        selectedCondition : ''
     },
 
     Enum: function (data) {

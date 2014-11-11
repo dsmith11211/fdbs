@@ -26,6 +26,7 @@ var View = Backbone.View.extend({
 
     render: function () {
         // console.log('item view rendered',this.collection.toJSON()[0]);
+        itemModel = this.collection.models[0];
         cachedItem = this.collection.toJSON()[0];
         console.log(JSON.stringify(cachedItem));
         this.$el.html(this.template(this.collection.toJSON()[0]));
