@@ -1,5 +1,7 @@
 /*global FdbsQuiz, $*/
 
+var cachedItem = null;
+var itemModel = null;
 
 window.FdbsQuiz = {
     Models: {},
@@ -7,9 +9,7 @@ window.FdbsQuiz = {
     Views: {},
     Routers: {},
     init: function () {
-        console.log('Hello from Backbone!');
-
-        var App = new AppView;
+        var App = new AppView();
     }
 };
 

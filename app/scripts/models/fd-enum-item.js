@@ -1,41 +1,38 @@
 var EnumItemModel = Backbone.Model.extend({
 
-    initialize: function(options) {
-    	
+    initialize: function() {
+        this.set({
+            selectedMat: cachedItem.material.description,
+            selectedCondition: cachedItem.condition.description
+        });
     },
 
     defaults: {
-    	unitType : 'in',
-    	disabled : true //Measurement Controls
+        unitType : 'in', //default selected val
+        disabled : true,
+        shapeType : '' ,
+        selectedMat : '',
+        selectedCondition : ''
     },
 
-    silent: {
+    Enum: function (data) {
+    	var self = this;
 
+    	self.condition = {
+    		description: data.condition.description
+    	};
+    	self.material = data.material;
+    	self.measurement = {
+    		shape: data.measurement.shape,
+    		unit: {
+    			cm: data.measurement.unit.cm,
+    			in: data.measurement.unit.in
+    		}
+    	}
+
+    	return self;
     },
 
-	Enum: function(data) {
-		var self = this;
-
-		self.condition = {
-			description: data.condition.description
-		};
-		self.material = data.material;
-		self.measurement = {
-			shape: data.measurement.shape,
-			unit: {
-				cm: {
-					type: data.measurement.unit.cm,
-					checked: false
-				},
-				in : {
-					type: data.measurement.unit.in,
-					checked: true
-				}
-			}
-		}
-
-		return self;
-	},
     validate: function(attrs, options) {
     },
 
@@ -43,11 +40,11 @@ var EnumItemModel = Backbone.Model.extend({
     	var self = this,
     		enumModel = {};
 
-    	// _.each(response, function(item){
-    	//     enumModel = new self.Enum(item);
-    	// })
+    	_.each(response, function(item){
+    	    enumModel = new self.Enum(item);
+    	})
 
-    	return response;
+    	self.set(enumModel);
     }
 });
 

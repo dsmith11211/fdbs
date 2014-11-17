@@ -19,20 +19,29 @@ var EnumView = Backbone.View.extend({
         var $target = $(unit.currentTarget);
         var unit = $target.val();
         this.toggleUnit(unit);
+        // console.log(this.model.toJSON());
     },
 
     toggleUnit: function(unit) {
+        this.model = this.collection.models[0];
         this.model.set({
             unitType: unit
-        })
-        this.model.save('unitType', {patch : true});
-        console.log(this.model.get('unitType'));
+        });
+        // console.log(this.model);
+        this.changeRender(this.model);
     },
 
     shapeSelected: function(shape) {
-        var $target = $(shape.currentTarget);
-        console.log($target.val());
+        this.model = this.collection.models[0];
+        var $target = $(shape.currentTarget),
+            type = $target.val();
 
+        this.model.set({
+            disabled : false,
+            shapeType : type
+        });
+
+        this.changeRender(this.model);
     },
 
     hazardSelected: function(bool) {
@@ -41,26 +50,49 @@ var EnumView = Backbone.View.extend({
     },
 
     materialSelected: function(item) {
+        this.model = this.collection.models[0];
         var $target = $(item.currentTarget);
         $target.closest('.dropdown-wrap')
             .find('[data-bind="label"]').text($target.text())
             .end()
             .children('.dropdown-toggle').dropdown('toggle');
 
+            this.model.set({
+                selectedMat: $target.text(),
+            })
+
+        this.changeRender(this.model);
         return false;
     },
 
-    unitChange: function(model, val, options) {
-        console.log(model.get("unitInches"))
-    },
+    changeRender : function(model) {
+
+        this.collection.remove(this.collection.at(0));
+        this.collection.add(model,{at:0});
+        // this.render();
+    },  
+
+    // unitChange: function(model, val, options) {
+    //     console.log(this.model.get("unitInches"));
+    //     // console.log(model,val,options);
+    //     var newModel = this.model.clone();
+
+
+    //     // this.collection.refresh(this.collection.models);
+    //     // model.save();
+    //     this.render();
+    // },
 
     initialize: function() {
-        this.collection = new EnumItemCollection();
+        this.model = this.collection.models[0];
         this.collection.on('add', this.render, this);
-        this.collection.on('reset', this.render, this);
-        this.listenTo(this.model, 'change', this.render);
-        
+        // this.model.on('change:unitInches', this.unitChange, this);
+        // this.model.on('change', this.render, this);
+        // if(this.model) {
+        //     this.model.on('change',this.render,this);
+        // }
     },
+
     render: function() {
         console.log('enum view rendered', this.collection.toJSON()[0]);
         this.$el.html(this.template(this.collection.toJSON()[0]));

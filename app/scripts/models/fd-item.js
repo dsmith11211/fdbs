@@ -34,7 +34,7 @@ var Model = Backbone.Model.extend({
         var self = this,
             itemModel = {};
 
-        _.each(response.result, function(item){
+        _.each(response, function(item){
             itemModel = new self.Item(item);
         })
         self.set(itemModel);
